@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.eu.ingwar.test1;
+package org.eu.ingwar.appengine.calendar;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;

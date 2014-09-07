@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package org.eu.ingwar.test1;
+package org.eu.ingwar.appengine.calendar;
 
+import org.eu.ingwar.appengine.calendar.SignGuestbookServlet;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
