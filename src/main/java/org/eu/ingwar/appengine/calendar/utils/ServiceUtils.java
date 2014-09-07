@@ -29,6 +29,7 @@ public class ServiceUtils {
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
     private static Calendar instance;
+    private static List<Event> holidays;
 
     public static Calendar getCalendarInstance() throws IOException {
         if (instance == null) {
@@ -40,7 +41,9 @@ public class ServiceUtils {
     
     
     public static boolean isHoliday(Date date) throws IOException {
-        List<Event> holidays = getCalendarInstance().events().list(HOLIDAYS_ID).execute().getItems();
+        if (holidays == null) {
+            holidays = getCalendarInstance().events().list(HOLIDAYS_ID).execute().getItems();
+        }
         
         for (Event ev : holidays) {
             Date eventDate = new Date(ev.getStart().getDate().getValue());
