@@ -5,8 +5,8 @@
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <groupId>org.eu.ingwar.test1</groupId>
-    <artifactId>test1</artifactId>
+    <groupId>org.eu.ingwar.utils</groupId>
+    <artifactId>visits</artifactId>
 
     <pluginRepositories>
         <pluginRepository>
@@ -17,8 +17,8 @@
     </pluginRepositories>
 
     <properties>
-        <appengine.app.version>1</appengine.app.version>
-        <appengine.target.version>1.9.10</appengine.target.version>
+        <appengine.app.version>2</appengine.app.version>
+        <appengine.target.version>1.9.12</appengine.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
