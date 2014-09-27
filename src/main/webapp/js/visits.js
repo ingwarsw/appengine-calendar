@@ -41,17 +41,12 @@ visitsApp.controller('VisitsCtrl', function($scope) {
         {name: 'Sat', selected: false},
         {name: 'Sun', selected: false}
     ];
-
-    $scope.get_selected = function() {
-
-    };
-
-    $scope.insert = function() {
+    
+    $scope.calculate = function() {
         $scope.query = {
             start: $scope.start,
-//            start: new Date(),
             count: $scope.count,
-            days: $scope.all_days
+            days:  $scope.all_days
         };
         console.log("Plan to send: " + $scope.query.start + " : " + $scope.query.count + ":" + $scope.query.days);
         gapi.client.visits.plan($scope.query).execute(function(resp) {
