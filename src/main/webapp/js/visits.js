@@ -7,9 +7,9 @@ function init() {
 //var visitsApp = angular.module('visitsApp', ['ui.calendar', 'ui.bootstrap']);
 var visitsApp = angular.module('visitsApp', ['ui.bootstrap']);
 
-visitsApp.controller('VisitsCtrl', function($scope) {
+visitsApp.controller('VisitsCtrl', ['$scope', '$window', function($scope, $window) {
 
-    window.ginit = function() {
+    $window.ginit = function() {
         $scope.$apply($scope.load_visits_lib);
     };
 
@@ -22,7 +22,7 @@ visitsApp.controller('VisitsCtrl', function($scope) {
     $scope.disabled = function(date, mode) {
         return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
     };
-    
+
     $scope.open = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -33,36 +33,36 @@ visitsApp.controller('VisitsCtrl', function($scope) {
     $scope.count = 10;
 
     $scope.all_days = [
+        {name: 'Sun', selected: false},
         {name: 'Mon', selected: true},
         {name: 'Tue', selected: false},
         {name: 'Wed', selected: false},
         {name: 'Thu', selected: true},
         {name: 'Fri', selected: false},
-        {name: 'Sat', selected: false},
-        {name: 'Sun', selected: false}
+        {name: 'Sat', selected: false}
     ];
-    
+
     $scope.calculate = function() {
-        $scope.query = {
+        var query = {
             start: $scope.start,
             count: $scope.count,
-            days:  $scope.all_days
+            days: $scope.all_days
         };
-        console.log("Plan to send: " + $scope.query.start + " : " + $scope.query.count + ":" + $scope.query.days);
-        gapi.client.visits.plan($scope.query).execute(function(resp) {
+        $scope.is_sending = true;
+        
+        gapi.client.visits.plan(query).execute(function(resp) {
             $scope.plan = resp;
+            $scope.is_sending = false;
             $scope.$apply();
-            console.log("recv: " + resp);
         });
     };
 
     $scope.load_visits_lib = function() {
         gapi.client.load('visits', 'v1', function() {
             $scope.is_backend_ready = true;
-            console.log("Api loaded");
+            console.log("Google Api loaded");
             $scope.$apply();
         }, '/_ah/api');
-        $scope.is_backend_ready = true;
     };
 
     $scope.eventSource = {
@@ -70,5 +70,5 @@ visitsApp.controller('VisitsCtrl', function($scope) {
         className: 'gcal-event', // an option!
         currentTimezone: 'America/Chicago' // an option!
     };
-});
+}]);
 
